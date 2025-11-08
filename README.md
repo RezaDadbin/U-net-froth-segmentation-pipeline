@@ -1,4 +1,4 @@
-# 🫧 UNet Froth Segmentation Pipeline
+# UNet Froth Segmentation Pipeline
 
 A modular **PyTorch** implementation of **UNet** for industrial froth image segmentation. This repository follows the **same workflow style** as the SBS‑Net froth pipeline: central configuration file, and four top‑level scripts for **train**, **evaluate**, **predict**, and **post‑process**.
 
@@ -197,15 +197,4 @@ outputs/
 
 ---
 
-## Authors & citation
 
-- **Reza Dadbin** — <https://github.com/RezaDadbin>  
-- **Sina Lotfi** — <https://github.com/cinaLotfi>
-
-If you use this pipeline, please acknowledge:
-
-> Reza Dadbin & Sina Lotfi — *UNet‑based Froth Segmentation Pipeline*
-
----
-
-**Note:** The overall structure and README flow are inspired by the SBS‑Net froth segmentation pipeline (mirrored design: single config, scripts for train/eval/predict/postprocess).
