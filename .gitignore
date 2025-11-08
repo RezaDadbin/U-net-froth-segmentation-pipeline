@@ -1,0 +1,70 @@
+# --- OS / Editors ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.code-workspace
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pyo
+*.orig
+*.bak
+*.swp
+.mypy_cache/
+.pytype/
+.pyre/
+.ruff_cache/
+.pytest_cache/
+.ipynb_checkpoints/
+*.ipynb
+
+# --- Environments ---
+.venv/
+venv/
+env/
+ENV/
+.python-version
+.env
+.env.*
+!.env.example
+
+# --- Packaging / build ---
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+wheels/
+*.spec
+MANIFEST
+
+# --- Logs / coverage ---
+logs/
+*.log
+coverage.xml
+htmlcov/
+.coverage*
+.tox/
+.nox/
+
+# --- Large artifacts ---
+*.pth
+*.pt
+*.ckpt
+
+# --- Project data & outputs (keep empty dirs via .gitkeep) ---
+data/
+
+
+outputs/
+
+
+checkpoints/
+
+
+# (optional) keep logs dir structure
+
