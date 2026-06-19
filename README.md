@@ -4,6 +4,13 @@ A modular **PyTorch** implementation of **UNet** for industrial froth image segm
 
 **Authors:** [Reza Dadbin](https://github.com/RezaDadbin) · [Sina Lotfi](https://github.com/cinaLotfi)
 
+## What This Demonstrates
+
+- A complete PyTorch segmentation workflow from training to post-processing
+- Polygon annotation rasterization for binary froth masks
+- Evaluation with segmentation metrics such as IoU and Dice
+- Reproducible scripts for training, prediction, and watershed refinement
+
 ---
 
 ## Table of contents
@@ -196,5 +203,4 @@ outputs/
 - **Noisy instances** → rely on `postprocess.py` (watershed), or increase `min_area` inside `unet_froth/utils/postprocess.py`.
 
 ---
-
 
