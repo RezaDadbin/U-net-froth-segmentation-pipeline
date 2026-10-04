@@ -1,8 +1,14 @@
 # UNet Froth Segmentation Pipeline
 
-A modular **PyTorch** implementation of **UNet** for industrial froth image segmentation. This repository follows the **same workflow style** as the SBS‑Net froth pipeline: central configuration file, and four top‑level scripts for **train**, **evaluate**, **predict**, and **post‑process**.
+A modular **PyTorch** implementation of **UNet** for industrial froth image segmentation. This repository follows the **same workflow style** as the SBS-Net froth pipeline: central configuration file, and four top-level scripts for **train**, **evaluate**, **predict**, and **post-process**.
 
 **Authors:** [Reza Dadbin](https://github.com/RezaDadbin) · [Sina Lotfi](https://github.com/cinaLotfi)
+
+## Research Status and Data Availability
+
+This repository forms part of broader froth-image analysis research. Experimental work completed; a data-paper manuscript is currently in preparation.
+
+The research dataset is private/proprietary and is not distributed with this repository. Code is provided for research and reproducibility with compatible, independently supplied data. Exact reproduction of the private experiments also requires their data, splits, configuration, and checkpoints.
 
 ## What This Demonstrates
 
@@ -24,7 +30,7 @@ A modular **PyTorch** implementation of **UNet** for industrial froth image segm
   - [1. Train](#1-train)
   - [2. Evaluate](#2-evaluate)
   - [3. Predict soft masks](#3-predict-soft-masks)
-  - [4. Watershed post‑processing](#4-watershed-post-processing)
+  - [4. Watershed post-processing](#4-watershed-post-processing)
 - [Outputs](#outputs)
 - [Reproducibility tips](#reproducibility-tips)
 - [Extending the project](#extending-the-project)
@@ -36,20 +42,20 @@ A modular **PyTorch** implementation of **UNet** for industrial froth image segm
 ## Key features
 
 - **UNet** backbone implemented in `unet_froth/models/unet.py`.
-- **scripts/** for the full workflow: training, evaluation, prediction of probability maps, and **watershed** post‑processing.
-- **Polygon JSON** labels (LabelMe/simple/COCO‑like) automatically rasterized into binary masks.
-- **Single `config.py`** holds paths & hyperparameters (mirrors the SBS‑Net style).
-- Inference is **dtype‑safe** and resizes probability maps back to the **original image size** for saving.
-- Designed to be **clear, reproducible, and production‑friendly**.
+- **scripts/** for the full workflow: training, evaluation, prediction of probability maps, and **watershed** post-processing.
+- **Polygon JSON** labels (LabelMe/simple/COCO-like) automatically rasterized into binary masks.
+- **Single `config.py`** holds paths & hyperparameters (mirrors the SBS-Net style).
+- Inference is **dtype-safe** and resizes probability maps back to the **original image size** for saving.
+- Centralizes configuration and separates training, evaluation, prediction, and post-processing scripts.
 
-> This pipeline’s **structure** is inspired by the SBS‑Net froth segmentation repo; we adapt the same ideas to a UNet implementation.
+> This pipeline’s **structure** is inspired by the SBS-Net froth segmentation repo; we adapt the same ideas to a UNet implementation.
 
 ---
 
 ## Repository structure
 
 ```
-UNet-froth-segmentation-pipeline/
+U-net-froth-segmentation-pipeline/
 ├── README.md
 ├── config.py                 # global configuration used by all scripts
 ├── unet_froth/
@@ -61,7 +67,7 @@ UNet-froth-segmentation-pipeline/
 │   ├── predict.py            # export soft probability maps as PNGs
 │   └── postprocess.py        # watershed instance refinement -> binary masks
 ├── data/
-│   ├── train/                # paired images + same‑stem JSON polygons
+│   ├── train/                # paired images + same-stem JSON polygons
 │   ├── val/
 │   └── eval/
 ├── checkpoints/
@@ -110,7 +116,7 @@ data/
 - Supported JSON schemas:
   - LabelMe: `{"shapes":[{"points":[[x,y],...]},...]}`
   - Simple polygons: `{"polygons":[[[x,y],...],...],"height":H,"width":W}`
-  - COCO‑like: `{"annotations":[{"segmentation":[[x1,y1,x2,y2,...]]},...],"height":H,"width":W}`
+  - COCO-like: `{"annotations":[{"segmentation":[[x1,y1,x2,y2,...]]},...],"height":H,"width":W}`
 - Any image **without** a JSON is **skipped** (warning printed), so training won’t crash.
 
 ---
@@ -137,9 +143,9 @@ Edit **`config.py`** to adjust everything in one place:
 ```bash
 python scripts/train.py
 ```
-- Tracks **train/val loss, IoU, and Dice**.  
+- Tracks training loss and validation loss, IoU, and Dice.
 - Saves `checkpoints/model_best.pth` (by validation IoU).  
-- To resume/fine‑tune, set `resume_checkpoint` in `config.py`.
+- To initialize from saved model weights, set `resume_checkpoint` in `config.py`. This does not restore optimizer state or the completed epoch count.
 
 ### 2. Evaluate
 ```bash
@@ -154,7 +160,7 @@ python scripts/predict.py
 - Runs on `data/eval/` and writes **probability maps** (`*_prob.png`) to `outputs/pred_masks/`.  
 - Each map is resized back to the original image resolution.
 
-### 4. Watershed post‑processing
+### 4. Watershed post-processing
 ```bash
 python scripts/postprocess.py
 ```
@@ -180,7 +186,7 @@ outputs/
 
 ## Reproducibility tips
 
-- Fix `seed` in `config.py` for deterministic runs.  
+- Record `seed` in `config.py`, package versions, device, and dataset splits. Identical seeds do not guarantee identical runs across hardware or software versions.
 - Keep `image_size` and augmentations unchanged between train/val/eval.  
 - Track dataset snapshots and Git commits for each experiment.
 
@@ -191,7 +197,7 @@ outputs/
 - Swap the backbone: add new architectures under `unet_froth/models/`.  
 - Add stronger augmentations in the dataset pipeline.  
 - Integrate TensorBoard or Weights & Biases in `scripts/train.py`.  
-- Add a sliding‑window predictor for very large images.
+- Add a sliding-window predictor for very large images.
 
 ---
 
@@ -204,3 +210,7 @@ outputs/
 
 ---
 
+
+## Authors & citation
+
+Froth-specific implementation and experimentation: **Reza Dadbin** and **Sina Lotfi**. The underlying U-Net architecture follows the published U-Net approach. Acknowledge this repository when using its workflow and cite the original method where appropriate. The data-paper manuscript is in preparation and is not a published reference.
